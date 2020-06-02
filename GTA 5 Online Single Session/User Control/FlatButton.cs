@@ -13,7 +13,6 @@ namespace GTA_5_Online_Single_Session.User_Control {
     public partial class FlatButton : UserControl {
 
         int round = 0;
-        bool autoRound = false;
 
         public FlatButton() {
             InitializeComponent();
@@ -30,7 +29,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
         public int ButtonRound {
             get { return round; }
             set {
-                if (autoRound)
+                if (AutoRound)
                     round = Height;
                 else
                     round = value;
@@ -39,10 +38,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
         }
 
         [Category("Auto Round"), Description("Applying Button Round Automatically")]
-        public bool AutoRound {
-            get { return autoRound; }
-            set { autoRound = value; }
-        }
+        public bool AutoRound { get; set; } = false;
 
         [Browsable(true)]
         [Category("Action")]
@@ -61,7 +57,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
         }
 
         private void FlatButton_SizeChanged(object sender, EventArgs e) {
-            if(autoRound)
+            if(AutoRound)
                 Utils.smoothBorder(this, Height);
         }
     }

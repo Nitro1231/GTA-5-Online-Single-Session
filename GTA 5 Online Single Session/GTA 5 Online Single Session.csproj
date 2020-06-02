@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlTest.Designer.cs">
+      <DependentUpon>ControlTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Floating.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Status.cs" />
     <Compile Include="Tabs\Overlay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -94,7 +101,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="User Control\TrackBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Control\TrackBar.Designer.cs">
+      <DependentUpon>TrackBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="ControlTest.resx">
+      <DependentUpon>ControlTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Floating.resx">
       <DependentUpon>Floating.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="User Control\Tab.resx">
       <DependentUpon>Tab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Control\TrackBar.resx">
+      <DependentUpon>TrackBar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

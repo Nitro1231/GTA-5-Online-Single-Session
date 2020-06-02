@@ -34,10 +34,10 @@ namespace GTA_5_Online_Single_Session.Tabs {
         }
 
         private void flatButton1_ButtonClick(object sender, EventArgs e) {
-            if (Settings.overlay) { // Stop Overlay
-                if (Settings.isGameRunning) {
+            if (Status.overlay) { // Stop Overlay
+                if (Status.isGameRunning) {
                     flatButton1.LabelText = "Start Overlay";
-                    Settings.overlay = false;
+                    Status.overlay = false;
                     Program.main.TopMost = true;
                     Program.main.Opacity = 1;
                     Program.main.Location = loc;
@@ -51,12 +51,12 @@ namespace GTA_5_Online_Single_Session.Tabs {
                 }
             } else {
                 flatButton1.LabelText = "End Overlay";
-                Settings.overlay = true;
+                Status.overlay = true;
                 Program.main.TopMost = true;
                 Program.main.Opacity = 0.8;
                 loc = Program.main.Location;
                 Rect gameLocation = new Rect();
-                GetWindowRect(Settings.gameProcess.Handle, ref gameLocation);
+                GetWindowRect(Status.gameProcess.Handle, ref gameLocation);
                 Program.main.Location = new Point(gameLocation.Left + 20, gameLocation.Top + 20);
             }
         }

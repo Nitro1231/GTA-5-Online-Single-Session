@@ -4,10 +4,17 @@ using System.Windows.Forms;
 
 namespace GTA_5_Online_Single_Session {
     public partial class Main : Form {
-        Floating floating;
+
+        Floating floating = new Floating();
+        MainAction mainAction = new MainAction();
+        Overlay overlay = new Overlay();
+        Tab mainTab = new Tab(0, 40, Properties.Resources.satellite_solid);
+        Tab overlayButton = new Tab(1, 50, Properties.Resources.layer_group_solid);
+        Tab settingTab = new Tab(2, 60, Properties.Resources.cog_solid);
+        Tab infoTab = new Tab(3, 70, Properties.Resources.info_solid);
+
         public Main() {
             InitializeComponent();
-            floating = new Floating();
 
             // Updating location and finish initialize.
             floating.Show();
@@ -20,25 +27,52 @@ namespace GTA_5_Online_Single_Session {
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, minPanel.Width);
 
-            MainAction mainAction = new MainAction();
-            Overlay overlay = new Overlay();
-            mainAction.Visible = false;
-
             tabPanel.Controls.Add(mainAction);
             tabPanel.Controls.Add(overlay);
 
-            Tab mainTab = new Tab(0, 40, Properties.Resources.satellite_solid);
-            Tab overlayButton = new Tab(1, 50, Properties.Resources.layer_group_solid);
-            Tab settingTab = new Tab(2, 60, Properties.Resources.cog_solid);
-            Tab infoTab = new Tab(3, 70, Properties.Resources.info_solid);
+            tabClicked(null, null);
+
             sidePanel.Controls.Add(mainTab);
             sidePanel.Controls.Add(overlayButton);
             sidePanel.Controls.Add(settingTab);
             sidePanel.Controls.Add(infoTab);
+            mainTab.TabClick += new EventHandler(tabClicked);
+            overlayButton.TabClick += new EventHandler(tabClicked);
+            settingTab.TabClick += new EventHandler(tabClicked);
+            infoTab.TabClick += new EventHandler(tabClicked);
+
+            ControlTest ct = new ControlTest();
+            ct.Show();
+        }
+
+        void tabClicked(object sender, EventArgs e) {
+            mainTab.select(false);
+            overlayButton.select(false);
+            settingTab.select(false);
+            infoTab.select(false);
+            mainAction.Visible = false;
+            overlay.Visible = false;
+
+            switch (Status.tabIndex) {
+                case 0:
+                    mainTab.select(true);
+                    mainAction.Visible = true;
+                    break;
+                case 1:
+                    overlayButton.select(true);
+                    overlay.Visible = true;
+                    break;
+                case 2:
+                    settingTab.select(true);
+                    break;
+                case 3:
+                    infoTab.select(true);
+                    break;
+            }
         }
 
         private void exitPanel_Click(object sender, EventArgs e) {
-            if (!Settings.applying) {
+            if (!Status.applying) {
                 Close();
             } else {
                 MessageBox.Show(
@@ -51,7 +85,7 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private void minPanel_Click(object sender, EventArgs e) {
-            if (Settings.floatingMode || Settings.overlay) {
+            if (Settings.floatingMode || Status.overlay) {
                 floating.Location = Location;
                 Hide();
                 floating.Show();
@@ -61,7 +95,7 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private void processChecker_Tick(object sender, EventArgs e) {
-            Settings.updateGameStatus();
+            Status.updateGameStatus();
         }
     }
 }

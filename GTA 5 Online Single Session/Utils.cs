@@ -13,8 +13,6 @@ using System.Drawing;
 
 namespace GTA_5_Online_Single_Session {
     class Utils {
-        public static bool moveable = true;
-
         [DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImport("user32.dll")]
@@ -26,10 +24,8 @@ namespace GTA_5_Online_Single_Session {
         private static extern bool DeleteObject(IntPtr hObject);
 
         public static void mouseMove(IntPtr handle) {
-            if (moveable) {
-                ReleaseCapture();
-                SendMessage(handle, 0xA1, 0x2, 0);
-            }
+            ReleaseCapture();
+            SendMessage(handle, 0xA1, 0x2, 0);
         }
 
         public static void smoothBorder(Form form, int round) {

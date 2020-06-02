@@ -8,8 +8,9 @@ using System.Diagnostics;
 
 namespace GTA_5_Online_Single_Session {
     public partial class MainAction : UserControl {
-        // Thanks to https://stackoverflow.com/questions/71257/suspend-process-in-c-sharp
 
+        #region Suspend Process
+        // Thanks to https://stackoverflow.com/questions/71257/suspend-process-in-c-sharp
         [Flags]
         public enum ThreadAccess : int {
             TERMINATE = (0x0001),
@@ -31,6 +32,7 @@ namespace GTA_5_Online_Single_Session {
         static extern int ResumeThread(IntPtr hThread);
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool CloseHandle(IntPtr handle);
+        #endregion
 
         bool gameCaptured = false;
         int count = 0;
@@ -45,7 +47,7 @@ namespace GTA_5_Online_Single_Session {
 
         private void MainAction_Load(object sender, EventArgs e) {
             try {
-                Settings.onGameStatusUpdate += new EventHandler(checkGameStatus);
+                Status.onGameStatusUpdate += new EventHandler(checkGameStatus);
             } catch {
                 throw;
             }
@@ -58,13 +60,13 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private void action_Click(object sender, EventArgs e) {
-            if (!Settings.applying)
+            if (!Status.applying)
                 updateUI(suspendProcess(true));
         }
 
         private async void updateUI(bool successes) {
             if (successes) {
-                Settings.applying = true;
+                Status.applying = true;
                 action.Text = "Applying...";
                 while (count < Width) {
                     count += Settings.speed;
@@ -78,7 +80,7 @@ namespace GTA_5_Online_Single_Session {
                 await Task.Delay(1000);
                 action.Text = "Click Me!";
                 Refresh();
-                Settings.applying = false;
+                Status.applying = false;
                 return;
             } else {
                 MessageBox.Show(
@@ -92,12 +94,12 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private bool suspendProcess(bool status) {
-            Settings.updateGameStatus();
-            if (!Settings.isGameRunning)
+            Status.updateGameStatus();
+            if (!Status.isGameRunning)
                 return false;
 
             if (status) {
-                foreach (ProcessThread pT in Settings.gameProcess.Threads) {
+                foreach (ProcessThread pT in Status.gameProcess.Threads) {
                     IntPtr pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)pT.Id);
                     if (pOpenThread == IntPtr.Zero)
                         continue;
@@ -105,9 +107,9 @@ namespace GTA_5_Online_Single_Session {
                     CloseHandle(pOpenThread);
                 }
             } else {
-                if (Settings.gameProcess.ProcessName == string.Empty)
+                if (Status.gameProcess.ProcessName == string.Empty)
                     return true;
-                foreach (ProcessThread pT in Settings.gameProcess.Threads) {
+                foreach (ProcessThread pT in Status.gameProcess.Threads) {
                     IntPtr pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)pT.Id);
                     if (pOpenThread == IntPtr.Zero)
                         continue;
@@ -130,7 +132,7 @@ namespace GTA_5_Online_Single_Session {
         }
 
         void checkGameStatus(object sender, EventArgs e) {
-            if (!Settings.isGameRunning) {
+            if (!Status.isGameRunning) {
                 gameCaptured = false;
                 action.Text = "Waiting for GTA5";
             } else {

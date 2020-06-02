@@ -11,15 +11,15 @@ namespace GTA_5_Online_Single_Session.User_Control {
         private void StatusDisplay_Load(object sender, EventArgs e) {
             BackColor = Color.Transparent;
             try {
-                Settings.onGameStatusUpdate += new EventHandler(updateDisplay);
+                Status.onGameStatusUpdate += new EventHandler(updateDisplay);
             } catch {
                 throw;
             }
         }
 
         void updateDisplay(object sender, EventArgs e) {
-            if (!Settings.applying) {
-                if (Settings.isGameRunning)
+            if (!Status.applying) {
+                if (Status.isGameRunning)
                     statusPic.Image = Properties.Resources.link_solid;
                 else
                     statusPic.Image = Properties.Resources.unlink_solid;
