@@ -61,6 +61,24 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tabs\Overlay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\Overlay.Designer.cs">
+      <DependentUpon>Overlay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\FlatButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Control\FlatButton.Designer.cs">
+      <DependentUpon>FlatButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\StatusDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Control\StatusDisplay.Designer.cs">
+      <DependentUpon>StatusDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Control\Tab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,6 +114,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tabs\Overlay.resx">
+      <DependentUpon>Overlay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Control\FlatButton.resx">
+      <DependentUpon>FlatButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Control\StatusDisplay.resx">
+      <DependentUpon>StatusDisplay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User Control\Tab.resx">
       <DependentUpon>Tab.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,8 +147,10 @@
     <Content Include="img\info-solid.svg" />
     <Content Include="img\layer-group-solid.png" />
     <Content Include="img\layer-group-solid.svg" />
+    <None Include="img\link-solid.png" />
     <Content Include="img\satellite-solid.png" />
     <Content Include="img\satellite-solid.svg" />
+    <None Include="img\unlink-solid.png" />
     <Content Include="img\window-restore-regular.png" />
     <Content Include="img\window-restore-regular.svg" />
   </ItemGroup>

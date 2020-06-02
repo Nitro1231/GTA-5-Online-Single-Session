@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTA_5_Online_Single_Session.Tabs;
+using System;
 using System.Windows.Forms;
 
 namespace GTA_5_Online_Single_Session {
@@ -19,8 +20,12 @@ namespace GTA_5_Online_Single_Session {
             Utils.smoothBorder(minPanel, minPanel.Width);
             Utils.smoothBorder(exitPanel, minPanel.Width);
 
-            MainAction mainAction = new MainAction(Handle);
+            MainAction mainAction = new MainAction();
+            Overlay overlay = new Overlay();
+            mainAction.Visible = false;
+
             tabPanel.Controls.Add(mainAction);
+            tabPanel.Controls.Add(overlay);
 
             Tab mainTab = new Tab(0, 40, Properties.Resources.satellite_solid);
             Tab overlayButton = new Tab(1, 50, Properties.Resources.layer_group_solid);
@@ -46,7 +51,7 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private void minPanel_Click(object sender, EventArgs e) {
-            if (Settings.floatingMode) {
+            if (Settings.floatingMode || Settings.overlay) {
                 floating.Location = Location;
                 Hide();
                 floating.Show();
@@ -56,7 +61,7 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private void processChecker_Tick(object sender, EventArgs e) {
-
+            Settings.updateGameStatus();
         }
     }
 }

@@ -25,12 +25,13 @@
         private void InitializeComponent() {
             this.titleText = new System.Windows.Forms.Label();
             this.action = new System.Windows.Forms.Label();
+            this.statusDisplay1 = new GTA_5_Online_Single_Session.User_Control.StatusDisplay();
             this.SuspendLayout();
             // 
             // titleText
             // 
             this.titleText.AutoSize = true;
-            this.titleText.Location = new System.Drawing.Point(6, 3);
+            this.titleText.Location = new System.Drawing.Point(10, 5);
             this.titleText.Name = "titleText";
             this.titleText.Size = new System.Drawing.Size(151, 13);
             this.titleText.TabIndex = 5;
@@ -50,18 +51,29 @@
             this.action.Click += new System.EventHandler(this.action_Click);
             this.action.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainAction_MouseMove);
             // 
+            // statusDisplay1
+            // 
+            this.statusDisplay1.BackColor = System.Drawing.Color.Transparent;
+            this.statusDisplay1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusDisplay1.ForeColor = System.Drawing.Color.White;
+            this.statusDisplay1.Location = new System.Drawing.Point(192, 2);
+            this.statusDisplay1.Name = "statusDisplay1";
+            this.statusDisplay1.Size = new System.Drawing.Size(18, 18);
+            this.statusDisplay1.TabIndex = 7;
+            // 
             // MainAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.Controls.Add(this.statusDisplay1);
             this.Controls.Add(this.titleText);
             this.Controls.Add(this.action);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "MainAction";
-            this.Size = new System.Drawing.Size(290, 120);
+            this.Size = new System.Drawing.Size(295, 120);
             this.Load += new System.EventHandler(this.MainAction_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainAction_Paint);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainAction_MouseMove);
@@ -74,5 +86,6 @@
 
         private System.Windows.Forms.Label titleText;
         private System.Windows.Forms.Label action;
+        private User_Control.StatusDisplay statusDisplay1;
     }
 }

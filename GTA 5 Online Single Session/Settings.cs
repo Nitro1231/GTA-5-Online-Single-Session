@@ -1,14 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GTA_5_Online_Single_Session {
     class Settings {
         static public int time = 8;
         static public int speed = 2;
-        static public bool floatingMode = true;
+        static public bool overlay = false;
+        static public bool floatingMode = false;
         static public bool applying = false;
+
+        static public Process gameProcess = null;
+        static public bool isGameRunning = false;
+
+        static public event EventHandler onGameStatusUpdate;
+
+        static public void updateGameStatus() {
+            Process process = Process.GetProcessesByName("GTA5").FirstOrDefault();
+            gameProcess = process;
+            isGameRunning = process != null;
+            onGameStatusUpdate?.Invoke(null, null);
+        }
     }
 }

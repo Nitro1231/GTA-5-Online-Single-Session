@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,12 +32,11 @@ namespace GTA_5_Online_Single_Session {
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool CloseHandle(IntPtr handle);
 
+        bool gameCaptured = false;
         int count = 0;
-        IntPtr mainHandle;
 
-        public MainAction(IntPtr mainHandle) {
+        public MainAction() {
             InitializeComponent();
-            this.mainHandle = mainHandle;
             SetStyle(
             ControlStyles.UserPaint |
             ControlStyles.AllPaintingInWmPaint |
@@ -50,10 +44,17 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private void MainAction_Load(object sender, EventArgs e) {
+            try {
+                Settings.onGameStatusUpdate += new EventHandler(checkGameStatus);
+            } catch {
+                throw;
+            }
+
             action.Location = new Point((Width - action.Width) / 2, (Height - action.Height) / 2);
+            statusDisplay1.Location = new Point(Width - (18 * 3 + 12), 2);
             action.BackColor = Color.Transparent;
             titleText.BackColor = Color.Transparent;
-            action.Text = "Click Me!";
+            //action.Text = "Click Me!";
         }
 
         private void action_Click(object sender, EventArgs e) {
@@ -82,7 +83,7 @@ namespace GTA_5_Online_Single_Session {
             } else {
                 MessageBox.Show(
                     this,
-                    "Cannot find GTA5.exe process! Please join the public session first, and try again.",
+                    "Cannot find GTA5 process! Please start the GAT5 and join the public session first, then try again.",
                     "Alert",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -91,42 +92,53 @@ namespace GTA_5_Online_Single_Session {
         }
 
         private bool suspendProcess(bool status) {
-            Process processList = Process.GetProcessesByName("GTA5").FirstOrDefault(); // throws exception if process does not 
-            //Console.Out(processList);
-            if (processList.Length == 0)
+            Settings.updateGameStatus();
+            if (!Settings.isGameRunning)
                 return false;
 
-                if (status) {
-                    foreach (ProcessThread pT in p.Threads) {
-                        IntPtr pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)pT.Id);
-                        if (pOpenThread == IntPtr.Zero)
-                            continue;
-                        SuspendThread(pOpenThread);
-                        CloseHandle(pOpenThread);
-                    }
-                } else {
-                    if (p.ProcessName == string.Empty)
-                        return true;
-                    foreach (ProcessThread pT in p.Threads) {
-                        IntPtr pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)pT.Id);
-                        if (pOpenThread == IntPtr.Zero)
-                            continue;
-                        var suspendCount = 0;
-                        do {
-                            suspendCount = ResumeThread(pOpenThread);
-                        } while (suspendCount > 0);
-                        CloseHandle(pOpenThread);
-                    }
+            if (status) {
+                foreach (ProcessThread pT in Settings.gameProcess.Threads) {
+                    IntPtr pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)pT.Id);
+                    if (pOpenThread == IntPtr.Zero)
+                        continue;
+                    SuspendThread(pOpenThread);
+                    CloseHandle(pOpenThread);
+                }
+            } else {
+                if (Settings.gameProcess.ProcessName == string.Empty)
+                    return true;
+                foreach (ProcessThread pT in Settings.gameProcess.Threads) {
+                    IntPtr pOpenThread = OpenThread(ThreadAccess.SUSPEND_RESUME, false, (uint)pT.Id);
+                    if (pOpenThread == IntPtr.Zero)
+                        continue;
+                    var suspendCount = 0;
+                    do {
+                        suspendCount = ResumeThread(pOpenThread);
+                    } while (suspendCount > 0);
+                    CloseHandle(pOpenThread);
+                }
             }
             return true;
         }
 
         private void MainAction_MouseMove(object sender, MouseEventArgs e) {
-            Utils.mouseMove(mainHandle);
+            Utils.mouseMove(Program.main.Handle);
         }
 
         private void action_SizeChanged(object sender, EventArgs e) {
             action.Location = new Point((Width - action.Width) / 2, (Height - action.Height) / 2);
+        }
+
+        void checkGameStatus(object sender, EventArgs e) {
+            if (!Settings.isGameRunning) {
+                gameCaptured = false;
+                action.Text = "Waiting for GTA5";
+            } else {
+                if (!gameCaptured) {
+                    gameCaptured = true;
+                    action.Text = "Click Me!";
+                }
+            }
         }
 
         private void MainAction_Paint(object sender, PaintEventArgs e) {

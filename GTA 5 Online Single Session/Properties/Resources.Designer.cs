@@ -93,9 +93,29 @@ namespace GTA_5_Online_Single_Session.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap link_solid {
+            get {
+                object obj = ResourceManager.GetObject("link-solid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap satellite_solid {
             get {
                 object obj = ResourceManager.GetObject("satellite-solid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unlink_solid {
+            get {
+                object obj = ResourceManager.GetObject("unlink-solid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

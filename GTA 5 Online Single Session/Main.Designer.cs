@@ -62,11 +62,10 @@
             // 
             // tabPanel
             // 
-            this.tabPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tabPanel.Location = new System.Drawing.Point(30, 0);
+            this.tabPanel.Location = new System.Drawing.Point(25, 0);
             this.tabPanel.Margin = new System.Windows.Forms.Padding(0);
             this.tabPanel.Name = "tabPanel";
-            this.tabPanel.Size = new System.Drawing.Size(290, 120);
+            this.tabPanel.Size = new System.Drawing.Size(295, 120);
             this.tabPanel.TabIndex = 4;
             // 
             // processChecker
@@ -83,8 +82,8 @@
             this.ClientSize = new System.Drawing.Size(320, 120);
             this.Controls.Add(this.minPanel);
             this.Controls.Add(this.exitPanel);
-            this.Controls.Add(this.tabPanel);
             this.Controls.Add(this.sidePanel);
+            this.Controls.Add(this.tabPanel);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
