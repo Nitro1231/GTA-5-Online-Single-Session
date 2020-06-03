@@ -7,8 +7,16 @@ using System.Drawing.Drawing2D;
 namespace GTA_5_Online_Single_Session.User_Control {
     public partial class ToggleButton : UserControl {
 
-        [Category("Value")]
-        public bool Value { get; set; } = false;
+        private bool isToggled = false;
+
+        [Category("Value"), DefaultValue(false)]
+        public bool Value {
+            get { return isToggled; }
+            set {
+                isToggled = value;
+                update();
+            }
+        }
 
         [Browsable(true)]
         [Category("Action")]
@@ -27,7 +35,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
         }
 
         private void dialPanel_Click(object sender, EventArgs e) {
-            Value = !Value;
+            isToggled = !isToggled;
             update();
             OnValueChanged?.Invoke(this, e);
         }
@@ -39,7 +47,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
             Utils.smoothBorder(backPanel, backPanel.Height);
 
             dialPanel.Size = new Size(Height - 4, Height - 4);
-            if (Value)
+            if (isToggled)
                 dialPanel.Location = new Point(Width - dialPanel.Width, (Height - dialPanel.Height) / 2);
             else
                 dialPanel.Location = new Point(0, (Height - dialPanel.Height) / 2);
@@ -52,7 +60,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
             Graphics graphics = e.Graphics;
             Rectangle gradient_rectangle = new Rectangle(0, 0, dialPanel.Width, dialPanel.Height);
             Brush b;
-            if (Value)
+            if (isToggled)
                 b = new LinearGradientBrush(gradient_rectangle, Color.FromArgb(90, 130, 230), Color.FromArgb(55, 210, 220), 65f);
             else
                 b = new LinearGradientBrush(gradient_rectangle, Color.FromArgb(230, 90, 100), Color.FromArgb(220, 55, 160), 65f);

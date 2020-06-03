@@ -7,23 +7,67 @@ using System.Drawing.Drawing2D;
 namespace GTA_5_Online_Single_Session.User_Control {
     public partial class TrackBar : UserControl {
 
-        [Category("Min Value")]
-        public int min { get; set; } = 0;
+        private int min = 0;
+        private int max = 100;
+        private int cValue = 50;
+        private int thickness = 6;
+        private int dialSize = 26;
+        private bool labelDisplay = false;
 
-        [Category("Max Value")]
-        public int max { get; set; } = 100;
 
-        [Category("Value")]
-        public int cValue { get; set; } = 50;
+        [Category("Min Value"), DefaultValue(0)]
+        public int Min {
+            get { return min; }
+            set {
+                min = value;
+                update();
+            }
+        }
 
-        [Category("Thickness")]
-        public int thickness { get; set; } = 6;
+        [Category("Max Value"), DefaultValue(100)]
+        public int Max { 
+            get { return max; }
+            set {
+                max = value;
+                update();
+            }
+        }
 
-        [Category("Dial Size")]
-        public int dialSize { get; set; } = 26;
+        [Category("Value"), DefaultValue(50)]
+        public int CurrentValue { 
+            get { return cValue; }
+            set {
+                cValue = value;
+                update();
+            }
+        }
 
-        [Category("Display Label")]
-        public bool labelDisplay { get; set; } = false;
+        [Category("Thickness"), DefaultValue(6)]
+        public int Thickness {
+            get { return thickness; }
+            set {
+                thickness = value;
+                update();
+            }
+        }
+
+        [Category("Dial Size"), DefaultValue(26)]
+        public int DialSize {
+            get { return dialSize; }
+            set {
+                dialSize = value;
+                update();
+            }
+        }
+
+        [Category("Display Label"), DefaultValue(false)]
+        public bool LabelDisplay {
+            get { return labelDisplay; }
+            set {
+                labelDisplay = value;
+                update();
+            }
+        }
 
         [Browsable(true)]
         [Category("Action")]
@@ -47,6 +91,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
 
         private void update() {
             displayLabel.Visible = labelDisplay;
+            displayLabel.Text = cValue.ToString();
 
             backPanel.Size = new Size(Width - dialSize - 4, thickness);
             backPanel.Location = new Point((Width - backPanel.Width) / 2, (Height - backPanel.Height) / 2);
@@ -55,6 +100,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
             dialPanel.Size = new Size(dialSize, dialSize);
             dialPanel.Location = new Point(backPanel.Left + (int)(backPanel.Width / (double)(max - min) * (cValue - min)) - dialSize / 2, (Height - dialPanel.Height) / 2);
             Utils.smoothBorder(dialPanel, dialSize);
+            //updateValue();            
         }
 
         private void dialPanel_Paint(object sender, PaintEventArgs e) {

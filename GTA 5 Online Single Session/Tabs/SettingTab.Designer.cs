@@ -76,18 +76,18 @@
             // trackBar1
             // 
             this.trackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.trackBar1.cValue = 8;
-            this.trackBar1.dialSize = 22;
+            this.trackBar1.CurrentValue = 8;
+            this.trackBar1.DialSize = 22;
             this.trackBar1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trackBar1.ForeColor = System.Drawing.Color.White;
-            this.trackBar1.labelDisplay = true;
+            this.trackBar1.LabelDisplay = true;
             this.trackBar1.Location = new System.Drawing.Point(13, 58);
-            this.trackBar1.max = 15;
-            this.trackBar1.min = 5;
+            this.trackBar1.Max = 15;
+            this.trackBar1.Min = 5;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(166, 25);
             this.trackBar1.TabIndex = 11;
-            this.trackBar1.thickness = 6;
+            this.trackBar1.Thickness = 6;
             this.trackBar1.OnValueChanged += new System.EventHandler(this.onSettingChanged);
             // 
             // label3

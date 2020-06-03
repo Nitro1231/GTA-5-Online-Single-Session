@@ -9,12 +9,13 @@ namespace GTA_5_Online_Single_Session.Tabs {
         }
 
         private void onSettingChanged(object sender, EventArgs e) {
-            Settings.time = trackBar1.cValue;
+            Settings.time = trackBar1.CurrentValue;
             Settings.floatingMode = toggleButton1.Value;
+            Settings.saveSetting();
         }
 
         private void SettingTab_VisibleChanged(object sender, EventArgs e) {
-            trackBar1.cValue = Settings.time;
+            trackBar1.CurrentValue = Settings.time;
             toggleButton1.Value = Settings.floatingMode;
         }
 

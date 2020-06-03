@@ -21,6 +21,7 @@ namespace GTA_5_Online_Single_Session {
             // Updating location and finish initialize.
             floating.Show();
             floating.Hide();
+            Settings.startUp();
         }
 
         private void Main_Load(object sender, EventArgs e) {
@@ -45,7 +46,9 @@ namespace GTA_5_Online_Single_Session {
             infoTab.TabClick += new EventHandler(tabClicked);
 
             ControlTest ct = new ControlTest();
-            ct.Show();
+            //ct.Show();
+
+            //Settings.checkUpdate();
         }
 
         void tabClicked(object sender, EventArgs e) {
