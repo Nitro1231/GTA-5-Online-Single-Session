@@ -53,6 +53,7 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "You also can display this program in the game.\r\n(Not supporting full screen yet.)" +
     "";
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseMove);
             // 
             // statusDisplay1
             // 
@@ -72,6 +73,7 @@
             this.titleText.Size = new System.Drawing.Size(151, 13);
             this.titleText.TabIndex = 8;
             this.titleText.Text = "GTA 5 Online Single Session";
+            this.titleText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseMove);
             // 
             // Overlay
             // 

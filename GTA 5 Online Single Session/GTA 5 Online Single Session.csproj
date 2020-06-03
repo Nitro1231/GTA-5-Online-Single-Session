@@ -74,6 +74,12 @@
     <Compile Include="Tabs\Overlay.Designer.cs">
       <DependentUpon>Overlay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tabs\SettingTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\SettingTab.Designer.cs">
+      <DependentUpon>SettingTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Control\FlatButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +107,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="User Control\ToggleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Control\ToggleButton.Designer.cs">
+      <DependentUpon>ToggleButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Control\TrackBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +145,9 @@
     <EmbeddedResource Include="Tabs\Overlay.resx">
       <DependentUpon>Overlay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tabs\SettingTab.resx">
+      <DependentUpon>SettingTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User Control\FlatButton.resx">
       <DependentUpon>FlatButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="User Control\Tab.resx">
       <DependentUpon>Tab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Control\ToggleButton.resx">
+      <DependentUpon>ToggleButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Control\TrackBar.resx">
       <DependentUpon>TrackBar.cs</DependentUpon>

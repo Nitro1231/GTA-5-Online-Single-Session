@@ -8,6 +8,8 @@ namespace GTA_5_Online_Single_Session {
         Floating floating = new Floating();
         MainAction mainAction = new MainAction();
         Overlay overlay = new Overlay();
+        SettingTab setting = new SettingTab();
+
         Tab mainTab = new Tab(0, 40, Properties.Resources.satellite_solid);
         Tab overlayButton = new Tab(1, 50, Properties.Resources.layer_group_solid);
         Tab settingTab = new Tab(2, 60, Properties.Resources.cog_solid);
@@ -29,6 +31,7 @@ namespace GTA_5_Online_Single_Session {
 
             tabPanel.Controls.Add(mainAction);
             tabPanel.Controls.Add(overlay);
+            tabPanel.Controls.Add(setting);
 
             tabClicked(null, null);
 
@@ -52,6 +55,7 @@ namespace GTA_5_Online_Single_Session {
             infoTab.select(false);
             mainAction.Visible = false;
             overlay.Visible = false;
+            setting.Visible = false;
 
             switch (Status.tabIndex) {
                 case 0:
@@ -64,6 +68,7 @@ namespace GTA_5_Online_Single_Session {
                     break;
                 case 2:
                     settingTab.select(true);
+                    setting.Visible = true;
                     break;
                 case 3:
                     infoTab.select(true);
