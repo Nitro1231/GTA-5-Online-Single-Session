@@ -1,17 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GTA_5_Online_Single_Session.Tabs {
     public partial class SettingTab : UserControl {
         public SettingTab() {
             InitializeComponent();
+            SettingTab_VisibleChanged(null, null);
+        }
+
+        private void onSettingChanged(object sender, EventArgs e) {
+            Settings.time = trackBar1.cValue;
+            Settings.floatingMode = toggleButton1.Value;
+        }
+
+        private void SettingTab_VisibleChanged(object sender, EventArgs e) {
+            trackBar1.cValue = Settings.time;
+            toggleButton1.Value = Settings.floatingMode;
+        }
+
+        private void SettingTab_MouseMove(object sender, MouseEventArgs e) {
+            Utils.mouseMove(Program.main.Handle);
         }
     }
 }

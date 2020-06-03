@@ -37,17 +37,17 @@
             this.flatButton1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.flatButton1.ForeColor = System.Drawing.Color.White;
             this.flatButton1.LabelText = "Start Overlay";
-            this.flatButton1.Location = new System.Drawing.Point(190, 81);
+            this.flatButton1.Location = new System.Drawing.Point(185, 75);
             this.flatButton1.Margin = new System.Windows.Forms.Padding(5);
             this.flatButton1.Name = "flatButton1";
-            this.flatButton1.Size = new System.Drawing.Size(100, 34);
+            this.flatButton1.Size = new System.Drawing.Size(100, 35);
             this.flatButton1.TabIndex = 0;
             this.flatButton1.ButtonClick += new System.EventHandler(this.flatButton1_ButtonClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 34);
+            this.label1.Location = new System.Drawing.Point(10, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(245, 26);
             this.label1.TabIndex = 2;

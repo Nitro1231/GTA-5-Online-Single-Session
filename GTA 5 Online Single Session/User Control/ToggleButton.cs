@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
@@ -14,6 +9,10 @@ namespace GTA_5_Online_Single_Session.User_Control {
 
         [Category("Value")]
         public bool Value { get; set; } = false;
+
+        [Browsable(true)]
+        [Category("Action")]
+        public event EventHandler OnValueChanged;
 
         public ToggleButton() {
             InitializeComponent();
@@ -30,6 +29,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
         private void dialPanel_Click(object sender, EventArgs e) {
             Value = !Value;
             update();
+            OnValueChanged?.Invoke(this, e);
         }
 
         private void update() {

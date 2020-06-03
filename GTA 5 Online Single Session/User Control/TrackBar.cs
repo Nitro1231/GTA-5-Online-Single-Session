@@ -25,6 +25,10 @@ namespace GTA_5_Online_Single_Session.User_Control {
         [Category("Display Label")]
         public bool labelDisplay { get; set; } = false;
 
+        [Browsable(true)]
+        [Category("Action")]
+        public event EventHandler OnValueChanged;
+
         private Point MouseDownLocation;
 
         public TrackBar() {
@@ -76,6 +80,7 @@ namespace GTA_5_Online_Single_Session.User_Control {
             else if (dialPanel.Left < dialSize / 2)
                 dialPanel.Left = 0;
             updateValue();
+            OnValueChanged?.Invoke(this, e);
         }
 
         private void updateValue() {
